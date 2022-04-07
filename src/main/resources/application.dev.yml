@@ -3,7 +3,7 @@ spring:
     mongodb:
       auto-index-creation: true
       database: kid_map
-      uri: mongodb+srv://admin:sundo0528soft@comfortfeeling.zi0os.mongodb.net/kid_map
+      uri: mongodb+srv://kidmap:kidmap34##@cluster0.17aps.mongodb.net/kidmap
 
   jpa:
     show-sql: true
