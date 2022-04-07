@@ -1,7 +1,7 @@
 #!/bin/bash
 
 REPOSITORY=/home/ec2-user/app
-PROJECT_NAME=comfort_feeling_server
+PROJECT_NAME=kidmap_server
 
 cd $REPOSITORY/$PROJECT_NAME/
 

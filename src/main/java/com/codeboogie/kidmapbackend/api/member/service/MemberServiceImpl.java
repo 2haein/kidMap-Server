@@ -19,6 +19,8 @@ public class MemberServiceImpl implements MemberService{
     public boolean createMember(MemberDTO memberDTO){
         try{
             Member kidmapMember = new Member();
+            kidmapMember.setUserId(memberDTO.getUserId());
+            kidmapMember.setUserName(memberDTO.getUserName());
             
             Member member = memberRepository.findByUserId(memberDTO.getUserId());
             System.out.println(member);
