@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  * @author 이해인
- * @version 1.0, 2021.10.08 생성
+ * @version 1.0, 2022.03.25 생성
  * 회원 API 객체 모델 정의
  *
  */

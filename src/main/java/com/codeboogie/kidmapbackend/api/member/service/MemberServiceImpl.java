@@ -18,16 +18,13 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public boolean createMember(MemberDTO memberDTO){
         try{
-            Member comfortMember = new Member();
-            comfortMember.setUserId(memberDTO.getUserId());
-            comfortMember.setUserName(memberDTO.getUserName());
-
-
+            Member kidmapMember = new Member();
+            
             Member member = memberRepository.findByUserId(memberDTO.getUserId());
             System.out.println(member);
 
             if (member == null) {
-                memberRepository.save(comfortMember);
+                memberRepository.save(kidmapMember);
             }
 
         } catch (Exception e){
