@@ -30,4 +30,5 @@ public class Member {
 
     private String userName; //카카오 사용자 이름
 
+    private Integer childNum;   // 자녀수
 }

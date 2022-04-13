@@ -9,4 +9,6 @@ public class MemberDTO {
     private String userId;
 
     private String userName;
+
+    private Integer childNum;
 }
