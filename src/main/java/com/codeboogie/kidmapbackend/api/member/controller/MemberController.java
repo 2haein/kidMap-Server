@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api")
@@ -44,7 +45,9 @@ public class MemberController {
             memberDTO.setChildNum(childNum);
             memberDTO.setUserId(userId);
 
-
+            // UUID 랜덤 고유 값 생성
+            UUID random = UUID.randomUUID();
+            System.out.println("랜덤 고유값 : " +random);
 
             memberService.updateMember(memberDTO);
 
