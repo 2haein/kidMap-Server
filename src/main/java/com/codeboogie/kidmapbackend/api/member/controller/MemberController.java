@@ -2,13 +2,10 @@ package com.codeboogie.kidmapbackend.api.member.controller;
 
 import com.codeboogie.kidmapbackend.api.member.service.MemberService;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.MemberDTO;
-import com.codeboogie.kidmapbackend.common.member.domain.model.Member;
-import com.codeboogie.kidmapbackend.common.member.domain.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api")
@@ -46,6 +43,9 @@ public class MemberController {
             String userId = String.valueOf(data.get("userId"));
             memberDTO.setChildNum(childNum);
             memberDTO.setUserId(userId);
+
+
+
             memberService.updateMember(memberDTO);
 
         } catch(final Exception e) {
@@ -53,5 +53,21 @@ public class MemberController {
         }
     }
 
+    @RequestMapping(path="/fetchChildNum", method={ RequestMethod.GET, RequestMethod.POST })
+    public @ResponseBody Integer fetchChildNum(@RequestBody HashMap<String, String> data, MemberDTO memberDTO) {
+        System.out.println("안드로이드 -> 서버 /fetchChildNum"+ data+ ":"+ data.get("userId"));
+
+        try {
+//            Integer childNum = Integer.parseInt(data.get("childNum"));
+            String userId = String.valueOf(data.get("userId"));
+            memberDTO.setUserId(userId);
+
+            return memberService.getchildNum(memberDTO);
+
+        } catch(final Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

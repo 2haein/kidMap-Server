@@ -73,7 +73,15 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public Integer getchildNum(MemberDTO memberDTO) {
-        return null;
+        Member kidmapMember = new Member();
+        kidmapMember.setUserId(memberDTO.getUserId());
+        System.out.println("안드로이드 -> 서버 ServiceImpl getchildNum 실행");
+
+        Member member = memberRepository.findByUserId(memberDTO.getUserId());
+        System.out.println("등록한 자녀수 가져오기: " + member.getChildNum());
+
+
+        return member.getChildNum();
     }
 
 
