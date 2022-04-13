@@ -46,7 +46,7 @@ public class MemberServiceImpl implements MemberService{
         return true;
     }
 
-
+    @Override
     public void updateMember(final MemberDTO memberDTO){
 //        if(memberDTO == null) {
 //            throw new NullPointerException("Data Null");
@@ -71,6 +71,10 @@ public class MemberServiceImpl implements MemberService{
         mongoTemplate.updateFirst(query, update, "member");
     }
 
+    @Override
+    public Integer getchildNum(MemberDTO memberDTO) {
+        return null;
+    }
 
 
 }
