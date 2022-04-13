@@ -17,10 +17,9 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
-
     @RequestMapping(value = "/member", method= {RequestMethod.POST})
     public @ResponseBody void insert(@RequestParam HashMap<String, String> data, MemberDTO memberDTO) {
-        System.out.println("안드로이드 -> 서버로 Post 요청"+ data+ ":"+ data.get("userId"));
+        System.out.println("안드로이드 -> 서버 /member"+ data+ ":"+ data.get("userId"));
 
         try{
 
@@ -36,4 +35,23 @@ public class MemberController {
         }
 
     }
+
+    @RequestMapping(path="/registerChild", method={ RequestMethod.GET, RequestMethod.POST })
+    public @ResponseBody void updateMember(@RequestBody HashMap<String, String> data, MemberDTO memberDTO) {
+        System.out.println("안드로이드 -> 서버 /registerChild"+ data+ ":"+ data.get("childNum") + " , " +data.get("userId"));
+
+        try {
+
+            Integer childNum = Integer.parseInt(data.get("childNum"));
+            String userId = String.valueOf(data.get("userId"));
+            memberDTO.setChildNum(childNum);
+            memberDTO.setUserId(userId);
+            memberService.updateMember(memberDTO);
+
+        } catch(final Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
