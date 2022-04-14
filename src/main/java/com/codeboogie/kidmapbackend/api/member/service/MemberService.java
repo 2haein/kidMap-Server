@@ -7,7 +7,10 @@ import java.text.ParseException;
 public interface MemberService {
     boolean createMember(MemberDTO memberDTO);
 
-    void updateMember(MemberDTO memberDTO);
+    void registerChild(MemberDTO memberDTO);
 
-    Integer getchildNum(MemberDTO memberDTO);
+    Integer fetchChildNum(MemberDTO memberDTO);
+
+    //UUID값 생성하기
+    void createUUID(int key, MemberDTO memberDTO);
 }

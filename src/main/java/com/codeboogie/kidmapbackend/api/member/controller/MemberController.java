@@ -2,6 +2,7 @@ package com.codeboogie.kidmapbackend.api.member.controller;
 
 import com.codeboogie.kidmapbackend.api.member.service.MemberService;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.MemberDTO;
+import com.codeboogie.kidmapbackend.util.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,10 +47,14 @@ public class MemberController {
             memberDTO.setUserId(userId);
 
             // UUID 랜덤 고유 값 생성
-            UUID random = UUID.randomUUID();
-            System.out.println("랜덤 고유값 : " +random);
-
-            memberService.updateMember(memberDTO);
+//            UUID random = UUID.randomUUID();
+//            System.out.println("랜덤 고유값 : " +random);
+            if(childNum!=null) {
+                for (int i = 0; i < childNum; i++) {
+                     memberService.createUUID(i, memberDTO);
+                }
+            }
+            memberService.registerChild(memberDTO);
 
         } catch(final Exception e) {
             e.printStackTrace();
@@ -58,14 +63,14 @@ public class MemberController {
 
     @RequestMapping(path="/fetchChildNum", method={ RequestMethod.GET, RequestMethod.POST })
     public @ResponseBody Integer fetchChildNum(@RequestBody HashMap<String, String> data, MemberDTO memberDTO) {
-        System.out.println("안드로이드 -> 서버 /fetchChildNum"+ data+ ":"+ data.get("userId"));
+        System.out.println("안드로이드 -> 서버 /fetchChildNum "+ data+ ":"+ data.get("userId"));
 
         try {
 //            Integer childNum = Integer.parseInt(data.get("childNum"));
             String userId = String.valueOf(data.get("userId"));
             memberDTO.setUserId(userId);
 
-            return memberService.getchildNum(memberDTO);
+            return memberService.fetchChildNum(memberDTO);
 
         } catch(final Exception e) {
             e.printStackTrace();
