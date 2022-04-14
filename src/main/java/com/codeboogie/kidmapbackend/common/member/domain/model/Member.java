@@ -5,7 +5,9 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 이해인
@@ -31,4 +33,7 @@ public class Member {
     private String userName; //카카오 사용자 이름
 
     private Integer childNum;   // 자녀수
+
+    private List<UUID> UUID = new ArrayList<UUID>();  // 자녀 UUID
+
 }

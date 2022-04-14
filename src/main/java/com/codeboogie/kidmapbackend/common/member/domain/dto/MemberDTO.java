@@ -1,6 +1,10 @@
 package com.codeboogie.kidmapbackend.common.member.domain.dto;
 
+import com.codeboogie.kidmapbackend.common.member.domain.model.UUID;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class MemberDTO {
@@ -11,4 +15,6 @@ public class MemberDTO {
     private String userName;
 
     private Integer childNum;
+
+    private List<UUID> UUID = new ArrayList<UUID>();
 }
