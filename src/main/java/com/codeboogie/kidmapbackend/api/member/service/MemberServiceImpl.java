@@ -2,7 +2,9 @@ package com.codeboogie.kidmapbackend.api.member.service;
 
 import com.codeboogie.kidmapbackend.common.member.domain.dto.MemberDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.model.Member;
+import com.codeboogie.kidmapbackend.common.member.domain.model.UUID;
 import com.codeboogie.kidmapbackend.common.member.domain.repository.MemberRepository;
+import com.codeboogie.kidmapbackend.util.RandomString;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -47,7 +51,7 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public void updateMember(final MemberDTO memberDTO){
+    public void registerChild(final MemberDTO memberDTO){
 //        if(memberDTO == null) {
 //            throw new NullPointerException("Data Null");
 //        }
@@ -57,7 +61,7 @@ public class MemberServiceImpl implements MemberService{
 
 
 
-        System.out.println("안드로이드 -> 서버 ServiceImpl updateMember 업데이트:"+ memberDTO.getChildNum());
+        System.out.println("안드로이드 -> 서버 ServiceImpl registerChild 업데이트:"+ memberDTO.getChildNum());
         Query query = new Query(Criteria.where("userId").is(memberDTO.getUserId()));
 
 
@@ -72,10 +76,10 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Integer getchildNum(MemberDTO memberDTO) {
+    public Integer fetchChildNum(MemberDTO memberDTO) {
         Member kidmapMember = new Member();
         kidmapMember.setUserId(memberDTO.getUserId());
-        System.out.println("안드로이드 -> 서버 ServiceImpl getchildNum 실행");
+        System.out.println("안드로이드 -> 서버 ServiceImpl fetchChildNum 실행");
 
         Member member = memberRepository.findByUserId(memberDTO.getUserId());
         System.out.println("등록한 자녀수 가져오기: " + member.getChildNum());
@@ -84,5 +88,32 @@ public class MemberServiceImpl implements MemberService{
         return member.getChildNum();
     }
 
+    @Override
+    public void createUUID(int key, MemberDTO memberDTO) {
+        Member kidmapMember = new Member();
+        kidmapMember.setUserId(memberDTO.getUserId());
 
+
+        System.out.println("안드로이드 -> 서버 ServiceImpl createUUID 실행");
+
+        RandomString rs = new RandomString(10);
+        String uuidValue = rs.nextString();
+        System.out.println("UUID 랜덤 값 확인 key-" + key +": " + uuidValue);
+
+        Member member = memberRepository.findByUserId(kidmapMember.getUserId());
+
+        List<UUID> arrayUUID = new ArrayList<>();
+        UUID item = new UUID();
+        item.key = key;
+        item.UUID = uuidValue;
+        arrayUUID.add(item);
+
+        Update update = new Update();
+        update.push("UUID").each(arrayUUID);
+        Query query = new Query(Criteria.where("userId").is(memberDTO.getUserId()));
+
+        mongoTemplate.updateFirst(query, update, "member");
+
+
+    }
 }
