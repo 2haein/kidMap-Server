@@ -2,12 +2,10 @@ package com.codeboogie.kidmapbackend.api.member.controller;
 
 import com.codeboogie.kidmapbackend.api.member.service.MemberService;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.MemberDTO;
-import com.codeboogie.kidmapbackend.util.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("api")
@@ -47,8 +45,6 @@ public class MemberController {
             memberDTO.setUserId(userId);
 
             // UUID 랜덤 고유 값 생성
-//            UUID random = UUID.randomUUID();
-//            System.out.println("랜덤 고유값 : " +random);
             if(childNum!=null) {
                 for (int i = 0; i < childNum; i++) {
                      memberService.createUUID(i, memberDTO);
