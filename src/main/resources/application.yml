@@ -6,6 +6,10 @@ spring:
     import:
       - optional:classpath:application.dev.yml
 
+  mvc:
+    view:
+      suffic: .html
+
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 

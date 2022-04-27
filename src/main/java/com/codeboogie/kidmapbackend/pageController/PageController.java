@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class PageController {
-    @GetMapping("/address")
+    @GetMapping("/kakaoAddr")
     public String addressPage(){
         return "kakaoAddr.html";
     }
