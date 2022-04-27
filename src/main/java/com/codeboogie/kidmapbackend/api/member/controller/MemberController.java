@@ -74,4 +74,25 @@ public class MemberController {
         return null;
     }
 
+    /*
+    * 전화번호 등록 Api
+    * */
+    @RequestMapping(path="/registerTelNumber", method={ RequestMethod.GET, RequestMethod.POST })
+    public @ResponseBody void registerTelNumber(@RequestBody HashMap<String, String> data, MemberDTO memberDTO) {
+        System.out.println("안드로이드 -> 서버 /registerTelNumber"+ data+ ":"+ data.get("telNum") + " , " +data.get("userId"));
+
+        try {
+
+            String telNum = data.get("telNum");
+            String userId = String.valueOf(data.get("userId"));
+            memberDTO.setTelNum(telNum);
+            memberDTO.setUserId(userId);
+
+
+            memberService.registerChild(memberDTO);
+
+        } catch(final Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

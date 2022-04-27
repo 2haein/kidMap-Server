@@ -14,6 +14,8 @@ public class MemberDTO {
 
     private String userName;
 
+    private String telNum;  // 부모 전화번호
+
     private Integer childNum;
 
     private List<UUID> UUID = new ArrayList<UUID>();

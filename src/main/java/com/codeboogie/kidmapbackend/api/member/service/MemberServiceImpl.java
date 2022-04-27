@@ -116,4 +116,29 @@ public class MemberServiceImpl implements MemberService{
 
 
     }
+
+    // 부모 전화번호 등록하기
+    @Override
+    public void registerTelNum(final MemberDTO memberDTO){
+//        if(memberDTO == null) {
+//            throw new NullPointerException("Data Null");
+//        }
+        Member kidmapMember = new Member();
+        kidmapMember.setUserId(memberDTO.getUserId());
+        kidmapMember.setTelNum(memberDTO.getTelNum());
+
+        System.out.println("안드로이드 -> 서버 ServiceImpl registerTelNum 업데이트:"+ memberDTO.getTelNum());
+        Query query = new Query(Criteria.where("userId").is(memberDTO.getUserId()));
+
+
+        //SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        //Date sDate = inputFormat.parse(feeling.getPublishDate().toString());
+
+        Update update = new Update();
+        update.set("telNum", kidmapMember.getTelNum());
+
+
+        mongoTemplate.updateFirst(query, update, "member");
+    }
+
 }

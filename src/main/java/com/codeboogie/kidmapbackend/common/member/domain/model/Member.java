@@ -32,6 +32,8 @@ public class Member {
 
     private String userName; //카카오 사용자 이름
 
+    private String telNum;  // 부모 전화번호
+
     private Integer childNum;   // 자녀수
 
     private List<UUID> UUID = new ArrayList<UUID>();  // 자녀 UUID
