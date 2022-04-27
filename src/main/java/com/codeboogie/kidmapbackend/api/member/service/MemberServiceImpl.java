@@ -1,8 +1,8 @@
 package com.codeboogie.kidmapbackend.api.member.service;
 
 import com.codeboogie.kidmapbackend.common.member.domain.dto.MemberDTO;
+import com.codeboogie.kidmapbackend.common.member.domain.model.Child;
 import com.codeboogie.kidmapbackend.common.member.domain.model.Member;
-import com.codeboogie.kidmapbackend.common.member.domain.model.UUID;
 import com.codeboogie.kidmapbackend.common.member.domain.repository.MemberRepository;
 import com.codeboogie.kidmapbackend.util.RandomString;
 import lombok.RequiredArgsConstructor;
@@ -102,14 +102,15 @@ public class MemberServiceImpl implements MemberService{
 
         Member member = memberRepository.findByUserId(kidmapMember.getUserId());
 
-        List<UUID> arrayUUID = new ArrayList<>();
-        UUID item = new UUID();
+        List<Child> arrayChild = new ArrayList<>();
+        Child item = new Child();
         item.key = key;
         item.UUID = uuidValue;
-        arrayUUID.add(item);
+        item.childName = member.getUserName()+"자녀"+(key+1);
+        arrayChild.add(item);
 
         Update update = new Update();
-        update.push("UUID").each(arrayUUID);
+        update.push("Child").each(arrayChild);
         Query query = new Query(Criteria.where("userId").is(memberDTO.getUserId()));
 
         mongoTemplate.updateFirst(query, update, "member");

@@ -36,6 +36,6 @@ public class Member {
 
     private Integer childNum;   // 자녀수
 
-    private List<UUID> UUID = new ArrayList<UUID>();  // 자녀 UUID
+    private List<Child> Child = new ArrayList<Child>();  // 자녀 UUID
 
 }
