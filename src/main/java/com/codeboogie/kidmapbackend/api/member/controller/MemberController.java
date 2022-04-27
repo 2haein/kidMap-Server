@@ -77,9 +77,9 @@ public class MemberController {
     /*
     * 전화번호 등록 Api
     * */
-    @RequestMapping(path="/registerTelNumber", method={ RequestMethod.GET, RequestMethod.POST })
+    @RequestMapping(path="/registerTelNum", method={ RequestMethod.GET, RequestMethod.POST })
     public @ResponseBody void registerTelNumber(@RequestBody HashMap<String, String> data, MemberDTO memberDTO) {
-        System.out.println("안드로이드 -> 서버 /registerTelNumber"+ data+ ":"+ data.get("telNum") + " , " +data.get("userId"));
+        System.out.println("안드로이드 -> 서버 /registerTelNum"+ data+ ":"+ data.get("telNum") + " , " +data.get("userId"));
 
         try {
 
@@ -89,10 +89,26 @@ public class MemberController {
             memberDTO.setUserId(userId);
 
 
-            memberService.registerChild(memberDTO);
+            memberService.registerTelNum(memberDTO);
 
         } catch(final Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @RequestMapping(path="/fetchTelNum", method={ RequestMethod.GET, RequestMethod.POST })
+    public @ResponseBody String fetchTelNum(@RequestBody HashMap<String, String> data, MemberDTO memberDTO) {
+        System.out.println("안드로이드 -> 서버 /fetchTelNum "+ data+ ":"+ data.get("userId"));
+
+        try {
+            String userId = String.valueOf(data.get("userId"));
+            memberDTO.setUserId(userId);
+
+            return memberService.fetchTelNum(memberDTO);
+
+        } catch(final Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

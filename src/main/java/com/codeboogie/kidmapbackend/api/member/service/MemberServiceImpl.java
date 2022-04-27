@@ -141,4 +141,17 @@ public class MemberServiceImpl implements MemberService{
         mongoTemplate.updateFirst(query, update, "member");
     }
 
+    @Override
+    public String fetchTelNum(MemberDTO memberDTO) {
+        Member kidmapMember = new Member();
+        kidmapMember.setUserId(memberDTO.getUserId());
+        System.out.println("안드로이드 -> 서버 ServiceImpl fetchTelNum 실행");
+
+        Member member = memberRepository.findByUserId(memberDTO.getUserId());
+        System.out.println("등록한 전화번호 가져오기: " + member.getTelNum());
+
+
+        return member.getTelNum();
+    }
+
 }

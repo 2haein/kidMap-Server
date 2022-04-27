@@ -16,5 +16,5 @@ public interface MemberService {
 
     void registerTelNum(MemberDTO memberDTO);   // 부모 전화번호 등록하기
 
-
+    String fetchTelNum(MemberDTO memberDTO);    // 부모 전화번호 가져오기
 }
