@@ -53,13 +53,14 @@ public class ChildServiceImpl implements ChildService{
         Query query = new Query();
         Criteria criteria = new Criteria();
 
-        Criteria criteria_arr[] = new Criteria[2];
+//        Criteria criteria_arr[] = new Criteria[2];
+        criteria = Criteria.where("UUID").is(uuid);
+        query.addCriteria(criteria);
+//        criteria_arr[0] = Criteria.where("uuid").is(uuid);
+//        criteria_arr[1] = Criteria.where("uuid").is(uuid);
 
-
-        criteria_arr[0] = Criteria.where("uuid").is(uuid);
-        criteria_arr[1] = Criteria.where("uuid").is(uuid);
-
-        query.addCriteria(criteria.andOperator(criteria_arr));
+//        query.addCriteria(criteria.andOperator(criteria_arr));
+//        System.out.println("123"+mongoTemplate.findOne(query, Child.class, "child"));
 
         return mongoTemplate.findOne(query, Child.class, "child");
 
