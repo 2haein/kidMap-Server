@@ -8,11 +8,11 @@ import java.util.List;
 public class ChildDTO {
     private String _id;
 
-    public int key;
+    private int key;
 
-    public String UUID; // 자녀 고유 식별자
+    private String UUID; // 자녀 고유 식별자
 
-    public String childName; // 자녀 이름
+    private String childName; // 자녀 이름
 
     private List<Errand> Errand = new ArrayList<Errand>(); // 각 자녀별 심부름 목록
 }
