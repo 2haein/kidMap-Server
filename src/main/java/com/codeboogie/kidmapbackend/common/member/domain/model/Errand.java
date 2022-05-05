@@ -41,5 +41,9 @@ public class Errand {
 
     private double target_longitude;   // 목표 장소 경도
 
+    private double start_latitude;   // 출발 장소 위도
+
+    private double start_longitude;   // 출발 장소 경도
+
     private boolean checking;  //   위험요소 파악했는지 여부
 }

@@ -32,6 +32,8 @@ public class ErrandController {
             String UUID = String.valueOf(data.get("UUID"));
             Double target_latitude = Double.valueOf((data.get("target_latitude")));
             Double target_longitude = Double.valueOf((data.get("target_longitude")));
+            Double start_latitude = Double.valueOf((data.get("start_latitude")));
+            Double start_longitude = Double.valueOf((data.get("start_longitude")));
             boolean checking = Boolean.parseBoolean(data.get("checking"));
 
             errandDTO.setUUID(UUID);
@@ -39,6 +41,8 @@ public class ErrandController {
             errandDTO.setE_content(E_content);
             errandDTO.setTarget_latitude(target_latitude);
             errandDTO.setTarget_longitude(target_longitude);
+            errandDTO.setStart_latitude(start_latitude);
+            errandDTO.setStart_longitude(start_longitude);
             errandDTO.setChecking(checking);
 
             errandService.registerErrand(errandDTO);

@@ -57,7 +57,7 @@ public class ChildServiceImpl implements ChildService{
 
 
         criteria_arr[0] = Criteria.where("uuid").is(uuid);
-//        criteria_arr[1] = Criteria.where("publishDate").gte(sDate).lte(eDate);
+        criteria_arr[1] = Criteria.where("uuid").is(uuid);
 
         query.addCriteria(criteria.andOperator(criteria_arr));
 
