@@ -5,6 +5,7 @@ import com.codeboogie.kidmapbackend.common.member.domain.dto.MemberDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.model.Member;
 
 import java.text.ParseException;
+import java.util.List;
 
 public interface MemberService {
     boolean createMember(MemberDTO memberDTO);
@@ -19,4 +20,5 @@ public interface MemberService {
 
     String fetchTelNum(MemberDTO memberDTO);    // 부모 전화번호 가져오기
 
+    List<String> fetchUUID(MemberDTO memberDTO);    // 부모에 속한 자녀 UUID 가져오기
 }

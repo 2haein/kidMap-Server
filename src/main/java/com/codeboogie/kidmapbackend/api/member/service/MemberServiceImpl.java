@@ -8,7 +8,6 @@ import com.codeboogie.kidmapbackend.common.member.domain.repository.ChildReposit
 import com.codeboogie.kidmapbackend.common.member.domain.repository.MemberRepository;
 import com.codeboogie.kidmapbackend.util.RandomString;
 import lombok.RequiredArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -16,7 +15,6 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -172,5 +170,24 @@ public class MemberServiceImpl implements MemberService{
 
         return member.getTelNum();
     }
+
+    // 부모에 속한 자녀 UUID 가져오기
+    @Override
+    public List<String> fetchUUID(MemberDTO memberDTO){
+        Member kidmapMember = new Member();
+        kidmapMember.setUserId(memberDTO.getUserId());
+        System.out.println("안드로이드 -> 서버 ServiceImpl fetchUUID 실행");
+
+        Member member = memberRepository.findByUserId(memberDTO.getUserId());
+        System.out.println("등록한 UUID 가져오기: " + member.getChild());
+        List<Child> childList = member.getChild();
+        List<String> uuidList = new ArrayList<>();
+        for(Child child : childList){
+            uuidList.add(child.getUUID());
+        }
+
+        return uuidList;
+    }
+
 
 }

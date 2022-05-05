@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -109,6 +110,22 @@ public class MemberController {
             memberDTO.setUserId(userId);
 
             return memberService.fetchTelNum(memberDTO);
+
+        } catch(final Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @RequestMapping(path="/fetchUUID", method={ RequestMethod.GET, RequestMethod.POST })
+    public @ResponseBody List<String> fetchUUID(@RequestBody HashMap<String, String> data, MemberDTO memberDTO) {
+        System.out.println("안드로이드 -> 서버 /fetchUUID "+ data+ ":"+ data.get("userId"));
+
+        try {
+            String userId = String.valueOf(data.get("userId"));
+            memberDTO.setUserId(userId);
+
+            return memberService.fetchUUID(memberDTO);
 
         } catch(final Exception e) {
             e.printStackTrace();
