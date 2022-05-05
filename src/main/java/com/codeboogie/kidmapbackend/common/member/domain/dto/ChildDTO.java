@@ -10,7 +10,7 @@ import java.util.List;
 public class ChildDTO {
     private String _id;
 
-    private int parent_id;  // 부모 아이디
+    private String parent_id;  // 부모 아이디
 
     private String parent_name; // 부모 이름
 

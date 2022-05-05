@@ -1,8 +1,10 @@
 package com.codeboogie.kidmapbackend.api.member.service;
 
+import com.codeboogie.kidmapbackend.common.member.domain.dto.ChildDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.MemberDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.model.Child;
 import com.codeboogie.kidmapbackend.common.member.domain.model.Member;
+import com.codeboogie.kidmapbackend.common.member.domain.repository.ChildRepository;
 import com.codeboogie.kidmapbackend.common.member.domain.repository.MemberRepository;
 import com.codeboogie.kidmapbackend.util.RandomString;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,9 @@ public class MemberServiceImpl implements MemberService{
 
     @Autowired
     private final MemberRepository memberRepository;
+
+    @Autowired
+    private final ChildRepository childRepository;
 
     @Autowired
     private MongoTemplate mongoTemplate; //몽고DB 템플릿 불러오기
@@ -88,11 +93,11 @@ public class MemberServiceImpl implements MemberService{
         return member.getChildNum();
     }
 
+    /**
+     *  자녀 등록 시 자녀테이블에 각각의 UUID에 맞게 레코드 생성
+     * */
     @Override
-    public void createUUID(int key, MemberDTO memberDTO) {
-        Member kidmapMember = new Member();
-        kidmapMember.setUserId(memberDTO.getUserId());
-
+    public void createUUID(int key, MemberDTO memberDTO, ChildDTO childDTO) {
 
         System.out.println("안드로이드 -> 서버 ServiceImpl createUUID 실행");
 
@@ -100,13 +105,13 @@ public class MemberServiceImpl implements MemberService{
         String uuidValue = rs.nextString();
         System.out.println("UUID 랜덤 값 확인 key-" + key +": " + uuidValue);
 
-        Member member = memberRepository.findByUserId(kidmapMember.getUserId());
+        Member member = memberRepository.findByUserId(memberDTO.getUserId());
 
         List<Child> arrayChild = new ArrayList<>();
         Child item = new Child();
-        item.key = key;
-        item.UUID = uuidValue;
-        item.childName = member.getUserName()+"자녀"+(key+1);
+        item.setKey(key);
+        item.setUUID(uuidValue);
+        item.setChildName(member.getUserName()+"자녀"+(key+1));
         arrayChild.add(item);
 
         Update update = new Update();
@@ -115,7 +120,20 @@ public class MemberServiceImpl implements MemberService{
 
         mongoTemplate.updateFirst(query, update, "member");
 
+        childDTO.setKey(key);
+        childDTO.setParent_name(member.getUserName());
+        childDTO.setParent_id(memberDTO.getUserId());
+        childDTO.setUUID(uuidValue);
+        childDTO.setChildName(member.getUserName()+"자녀"+(key+1));
 
+        Child child = new Child();
+        child.setKey(childDTO.getKey());
+        child.setParent_id(childDTO.getParent_id());
+        child.setParent_name(childDTO.getParent_name());
+        child.setChildName(childDTO.getChildName());
+        child.setUUID(childDTO.getUUID());
+
+        childRepository.save(child);
     }
 
     // 부모 전화번호 등록하기

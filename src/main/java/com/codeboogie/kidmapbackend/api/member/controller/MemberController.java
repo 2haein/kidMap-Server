@@ -1,11 +1,14 @@
 package com.codeboogie.kidmapbackend.api.member.controller;
 
 import com.codeboogie.kidmapbackend.api.member.service.MemberService;
+import com.codeboogie.kidmapbackend.common.member.domain.dto.ChildDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.MemberDTO;
+import com.codeboogie.kidmapbackend.common.member.domain.model.Child;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api")
@@ -34,7 +37,7 @@ public class MemberController {
     }
 
     @RequestMapping(path="/registerChild", method={ RequestMethod.GET, RequestMethod.POST })
-    public @ResponseBody void updateMember(@RequestBody HashMap<String, String> data, MemberDTO memberDTO) {
+    public @ResponseBody void updateMember(@RequestBody HashMap<String, String> data, MemberDTO memberDTO, ChildDTO childDTO) {
         System.out.println("안드로이드 -> 서버 /registerChild"+ data+ ":"+ data.get("childNum") + " , " +data.get("userId"));
 
         try {
@@ -43,11 +46,12 @@ public class MemberController {
             String userId = String.valueOf(data.get("userId"));
             memberDTO.setChildNum(childNum);
             memberDTO.setUserId(userId);
+            childDTO.setParent_id(userId);
 
             // UUID 랜덤 고유 값 생성
             if(childNum!=null) {
                 for (int i = 0; i < childNum; i++) {
-                     memberService.createUUID(i, memberDTO);
+                     memberService.createUUID(i, memberDTO, childDTO);
                 }
             }
             memberService.registerChild(memberDTO);
@@ -111,4 +115,5 @@ public class MemberController {
         }
         return null;
     }
+
 }
