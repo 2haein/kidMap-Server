@@ -9,4 +9,9 @@ public class PageController {
     public String addressPage(){
         return "kakaoAddr.html";
     }
+
+    @GetMapping("/daumpost")
+    public String postPage(){
+        return "daum.html";
+    }
 }
