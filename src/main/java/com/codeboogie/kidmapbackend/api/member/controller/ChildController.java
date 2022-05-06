@@ -46,4 +46,17 @@ public class ChildController {
         return childService.fetchChild(uuid);
 
     }
+
+    // 아이 현재 위치 저장하기
+    @RequestMapping(path = "/savePositionChild", method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody
+    void savePositionChild(@RequestBody HashMap<String, String> data, ChildDTO childDTO) {
+        System.out.println("안드로이드 -> 서버 /savePositionChild " + data + ":" + data.get("UUID"));
+
+        String uuid = String.valueOf(data.get("UUID"));
+//            childDTO.setUUID(uuid);
+
+//        childService.savePositionChild(uuid);
+
+    }
 }

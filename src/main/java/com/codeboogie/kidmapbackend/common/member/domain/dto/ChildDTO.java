@@ -20,5 +20,9 @@ public class ChildDTO {
 
     private String childName; // 자녀 이름
 
+    private double current_latitude;   // 아이 현재 위치 위도
+
+    private double current_longitude;   // 아이 현재 위치 경도
+
     private List<Errand> Errand = new ArrayList<Errand>(); // 각 자녀별 심부름 목록
 }
