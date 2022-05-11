@@ -42,8 +42,12 @@ public class ErrandServiceImpl implements ErrandService{
         errand.setE_content(errandDTO.getE_content());
         errand.setTarget_latitude(errandDTO.getTarget_latitude());
         errand.setTarget_longitude(errandDTO.getTarget_longitude());
+        errand.setTarget_name(errandDTO.getTarget_name());
         errand.setStart_latitude(errandDTO.getStart_latitude());
         errand.setStart_longitude(errandDTO.getStart_longitude());
+        errand.setStart_name(errandDTO.getStart_name());
+        errand.setChecking(errandDTO.isChecking());
+        errand.setQuest(errandDTO.getQuest());
 
         System.out.println("안드로이드 -> 서버 ServiceImpl registerErrand 업데이트:"+ errandDTO.getE_date()+errandDTO.getE_content());
 
