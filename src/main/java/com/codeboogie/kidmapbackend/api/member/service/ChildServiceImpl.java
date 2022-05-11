@@ -78,7 +78,7 @@ public class ChildServiceImpl implements ChildService{
 //        kidmapMember.setTelNum(memberDTO.getTelNum());
 
         System.out.println("안드로이드 -> 서버 ServiceImpl savePositionChild 업데이트:"+ uuid);
-        Query query = new Query(Criteria.where("uuid").is(uuid));
+        Query query = new Query(Criteria.where("UUID").is(uuid));
 
 
         //SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
