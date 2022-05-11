@@ -54,9 +54,12 @@ public class ChildController {
         System.out.println("안드로이드 -> 서버 /savePositionChild " + data + ":" + data.get("UUID"));
 
         String uuid = String.valueOf(data.get("UUID"));
+        Double current_latitude = Double.valueOf((data.get("current_latitude")));   // 아이 현재 위치 위도
+        Double current_longitude = Double.valueOf((data.get("current_longitude")));     // 아이 현재 위치 경도
+
 //            childDTO.setUUID(uuid);
 
-//        childService.savePositionChild(uuid);
+        childService.savePositionChild(uuid);
 
     }
 }

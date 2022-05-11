@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -63,7 +64,31 @@ public class ChildServiceImpl implements ChildService{
 //        System.out.println("123"+mongoTemplate.findOne(query, Child.class, "child"));
 
         return mongoTemplate.findOne(query, Child.class, "child");
+    }
 
+
+    // 아이 현재 위치 저장하
+    @Override
+    public void savePositionChild(String uuid){
+//        if(uuid == null) {
+//            throw new NullPointerException("Data Null");
+//        }
+        Member kidmapMember = new Member();
+        kidmapMember.setUserId(memberDTO.getUserId());
+        kidmapMember.setTelNum(memberDTO.getTelNum());
+
+        System.out.println("안드로이드 -> 서버 ServiceImpl registerTelNum 업데이트:"+ memberDTO.getTelNum());
+        Query query = new Query(Criteria.where("uuid").is(memberDTO.getUserId()));
+
+
+        //SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        //Date sDate = inputFormat.parse(feeling.getPublishDate().toString());
+
+        Update update = new Update();
+        update.set("telNum", kidmapMember.getTelNum());
+
+
+        mongoTemplate.updateFirst(query, update, "member");
     }
 
 }

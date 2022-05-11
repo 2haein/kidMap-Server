@@ -8,4 +8,6 @@ public interface ChildService {
     boolean findUUID(ChildDTO childDTO);    // 아이 UUID맞는지 확인하고 아이 이름 가져오기
 
     Child fetchChild(String uuid);    // 아이 정보 가져오기
+
+    void savePositionChild(String uuid);    // 아이 현재 위치 저장하기
 }
