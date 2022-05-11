@@ -1,4 +1,7 @@
+package com.codeboogie.kidmapbackend.api.member.controller;
+
 import com.codeboogie.kidmapbackend.api.member.service.MemberService;
+import com.codeboogie.kidmapbackend.api.member.service.NotifyService;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.MemberDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.NotifyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +16,8 @@ public class NotifyController {
     @Autowired
     private NotifyService notifyService;
 
-    @RequestMapping(value = "/notifyDanger", method = {RequestMethod.POST})
-    public @ResponseBody void notifyDanger(@RequestParam HashMap<String, String> data, NotifyDTO notifyDTO) {
+    @RequestMapping(value = "/registerNotify", method = {RequestMethod.POST})
+    public @ResponseBody void registerNotify(@RequestParam HashMap<String, String> data, NotifyDTO notifyDTO) {
         System.out.println("안드로이드 -> 서버 /notifyDanger" + data + ":" + data.get("userId"));
 
         try {
