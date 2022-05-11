@@ -69,26 +69,28 @@ public class ChildServiceImpl implements ChildService{
 
     // 아이 현재 위치 저장하
     @Override
-    public void savePositionChild(String uuid){
+    public void savePositionChild(String uuid, Double current_latitude, Double current_longitude){
 //        if(uuid == null) {
 //            throw new NullPointerException("Data Null");
 //        }
-        Member kidmapMember = new Member();
-        kidmapMember.setUserId(memberDTO.getUserId());
-        kidmapMember.setTelNum(memberDTO.getTelNum());
+//        Member kidmapMember = new Member();
+//        kidmapMember.setUserId(memberDTO.getUserId());
+//        kidmapMember.setTelNum(memberDTO.getTelNum());
 
-        System.out.println("안드로이드 -> 서버 ServiceImpl registerTelNum 업데이트:"+ memberDTO.getTelNum());
-        Query query = new Query(Criteria.where("uuid").is(memberDTO.getUserId()));
+        System.out.println("안드로이드 -> 서버 ServiceImpl savePositionChild 업데이트:"+ uuid);
+        Query query = new Query(Criteria.where("uuid").is(uuid));
 
 
         //SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         //Date sDate = inputFormat.parse(feeling.getPublishDate().toString());
 
         Update update = new Update();
-        update.set("telNum", kidmapMember.getTelNum());
+        update.set("current_latitude", current_latitude);
+        update.set("current_longitude", current_longitude);
 
 
-        mongoTemplate.updateFirst(query, update, "member");
+
+        mongoTemplate.updateFirst(query, update, "child");
     }
 
 }

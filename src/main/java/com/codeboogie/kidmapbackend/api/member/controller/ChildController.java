@@ -59,7 +59,7 @@ public class ChildController {
 
 //            childDTO.setUUID(uuid);
 
-        childService.savePositionChild(uuid);
+        childService.savePositionChild(uuid, current_latitude, current_longitude);
 
     }
 }

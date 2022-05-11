@@ -9,5 +9,5 @@ public interface ChildService {
 
     Child fetchChild(String uuid);    // 아이 정보 가져오기
 
-    void savePositionChild(String uuid);    // 아이 현재 위치 저장하기
+    void savePositionChild(String uuid, Double current_latitude, Double current_longitude);    // 아이 현재 위치 저장하기
 }
