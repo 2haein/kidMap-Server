@@ -21,13 +21,13 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "Notify")
+@Document(collection = "notify")
 public class Notify {
 
     @Id
     private String _id;
 
-    @Indexed(unique = true)
+//    @Indexed(unique = true)
     private String userId; //카카오 사용자 아이디
 
     private double notify_latitude;  // 위험지역 위도

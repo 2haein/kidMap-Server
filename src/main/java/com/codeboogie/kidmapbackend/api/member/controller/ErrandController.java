@@ -4,6 +4,9 @@ import com.codeboogie.kidmapbackend.api.member.service.ErrandService;
 import com.codeboogie.kidmapbackend.api.member.service.MemberService;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.ErrandDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.MemberDTO;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +19,6 @@ public class ErrandController {
 
     @Autowired
     private ErrandService errandService;
-
 
     @RequestMapping(path="/registerErrand", method={ RequestMethod.GET, RequestMethod.POST })
     public @ResponseBody void registerErrand(@RequestBody HashMap<String, String> data, ErrandDTO errandDTO) {
@@ -36,8 +38,9 @@ public class ErrandController {
             Double start_longitude = Double.valueOf((data.get("start_longitude")));
             String start_name = String.valueOf(data.get("start_name"));
             boolean checking = Boolean.parseBoolean(data.get("checking"));
-            List<String> quest = new ArrayList<String>();
-            quest = Arrays.asList((data.get("quest")));
+            JSONParser json = new JSONParser();
+            JSONArray jsonArray = (JSONArray) json.parse(data.get("quest"));
+            List<String> quest = jsonArray;
 
             errandDTO.setUUID(UUID);
             errandDTO.setE_date(E_date);

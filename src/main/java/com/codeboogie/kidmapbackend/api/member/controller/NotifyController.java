@@ -16,8 +16,8 @@ public class NotifyController {
     @Autowired
     private NotifyService notifyService;
 
-    @RequestMapping(value = "/registerNotify", method = {RequestMethod.POST})
-    public @ResponseBody void registerNotify(@RequestParam HashMap<String, String> data, NotifyDTO notifyDTO) {
+    @RequestMapping(value = "/registerNotify", method = {RequestMethod.POST, RequestMethod.GET})
+    public @ResponseBody void registerNotify(@RequestBody HashMap<String, String> data, NotifyDTO notifyDTO) {
         System.out.println("안드로이드 -> 서버 /notifyDanger" + data + ":" + data.get("userId"));
 
         try {

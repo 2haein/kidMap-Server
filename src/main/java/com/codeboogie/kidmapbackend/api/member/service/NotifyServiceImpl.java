@@ -28,13 +28,12 @@ public class NotifyServiceImpl implements NotifyService{
     @Override
     public void registerNotify(NotifyDTO notifyDTO){
         try{
-
             Notify notify = new Notify();
             notify.setUserId(notifyDTO.getUserId());
-            notify.setNotify_name(notify.getNotify_name());
-            notify.setNotify_content(notify.getNotify_content());
-            notify.setNotify_latitude(notify.getNotify_latitude());
-            notify.setNotify_longitude(notify.getNotify_longitude());
+            notify.setNotify_name(notifyDTO.getNotify_name());
+            notify.setNotify_content(notifyDTO.getNotify_content());
+            notify.setNotify_latitude(notifyDTO.getNotify_latitude());
+            notify.setNotify_longitude(notifyDTO.getNotify_longitude());
 
             notifyRepository.save(notify);
 

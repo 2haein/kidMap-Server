@@ -53,6 +53,18 @@ public class ErrandServiceImpl implements ErrandService{
 
         errandRepository.save(errand);
 
+        /**
+         * 등록한 심부름 Child collection에 업데이트하기*/
+        Query query = new Query(Criteria.where("UUID").is(errandDTO.getUUID()));
+
+        List<Errand> errandList = new ArrayList<>();
+        errandList.add(errand);
+
+        Update update = new Update();
+        update.push("Errand", errand);
+
+        mongoTemplate.updateFirst(query, update, "child");
+
 
     } catch (Exception e){
         System.out.println("심부름 정보 저장 오류......");
