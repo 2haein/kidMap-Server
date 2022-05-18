@@ -124,12 +124,14 @@ public class MemberServiceImpl implements MemberService{
         childDTO.setUUID(uuidValue);
         childDTO.setChildName(member.getUserName()+"자녀"+(key+1));
 
+
         Child child = new Child();
         child.setKey(childDTO.getKey());
         child.setParent_id(childDTO.getParent_id());
         child.setParent_name(childDTO.getParent_name());
         child.setChildName(childDTO.getChildName());
         child.setUUID(childDTO.getUUID());
+        child.setParent_telNum("");
 
         childRepository.save(child);
     }
@@ -146,16 +148,19 @@ public class MemberServiceImpl implements MemberService{
 
         System.out.println("안드로이드 -> 서버 ServiceImpl registerTelNum 업데이트:"+ memberDTO.getTelNum());
         Query query = new Query(Criteria.where("userId").is(memberDTO.getUserId()));
-
+        Query query2 = new Query(Criteria.where("parent_id").is(memberDTO.getUserId()));
 
         //SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         //Date sDate = inputFormat.parse(feeling.getPublishDate().toString());
 
         Update update = new Update();
+        Update update2 = new Update();
         update.set("telNum", kidmapMember.getTelNum());
+        update2.set("parent_telNum", kidmapMember.getTelNum());
 
 
         mongoTemplate.updateFirst(query, update, "member");
+        mongoTemplate.updateMulti(query2, update2, "child");
     }
 
     @Override
