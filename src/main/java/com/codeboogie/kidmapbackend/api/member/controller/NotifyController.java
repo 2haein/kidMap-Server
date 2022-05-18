@@ -6,10 +6,12 @@ import com.codeboogie.kidmapbackend.common.member.domain.dto.ChildDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.MemberDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.NotifyDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.model.Child;
+import com.codeboogie.kidmapbackend.common.member.domain.model.Notify;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("api")
@@ -46,12 +48,12 @@ public class NotifyController {
     // 신고된 위험 지역 정보 가져오기
     @RequestMapping(path = "/fetchNotify", method = {RequestMethod.GET, RequestMethod.POST})
     public @ResponseBody
-    void fetchNotify() {
+    List<Notify> fetchNotify() {
         System.out.println("안드로이드 -> 서버 /fetchNotify ");
 
 //        String uuid = String.valueOf(data.get("UUID"));
 
-//        return notifyService.fetchNotify();
+        return notifyService.fetchNotify();
 
     }
 }

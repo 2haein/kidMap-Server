@@ -14,6 +14,9 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class NotifyServiceImpl implements NotifyService{
@@ -44,6 +47,15 @@ public class NotifyServiceImpl implements NotifyService{
             System.out.println("registerNotify 오류발생......");
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<Notify> fetchNotify(){
+
+        List<Notify> notifyList = new ArrayList<>();
+
+        notifyList = mongoTemplate.findAll(Notify.class, "notify");
+        return notifyList;
     }
 
 }
