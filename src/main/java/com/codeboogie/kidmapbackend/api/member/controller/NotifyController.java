@@ -2,8 +2,10 @@ package com.codeboogie.kidmapbackend.api.member.controller;
 
 import com.codeboogie.kidmapbackend.api.member.service.MemberService;
 import com.codeboogie.kidmapbackend.api.member.service.NotifyService;
+import com.codeboogie.kidmapbackend.common.member.domain.dto.ChildDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.MemberDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.NotifyDTO;
+import com.codeboogie.kidmapbackend.common.member.domain.model.Child;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,6 +40,18 @@ public class NotifyController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+    }
+
+    // 신고된 위험 지역 정보 가져오기
+    @RequestMapping(path = "/fetchNotify", method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody
+    void fetchNotify() {
+        System.out.println("안드로이드 -> 서버 /fetchNotify ");
+
+//        String uuid = String.valueOf(data.get("UUID"));
+
+//        return notifyService.fetchNotify();
 
     }
 }
