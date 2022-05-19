@@ -39,8 +39,12 @@ public class ErrandController {
             String start_name = String.valueOf(data.get("start_name"));
             boolean checking = Boolean.parseBoolean(data.get("checking"));
             JSONParser json = new JSONParser();
-            JSONArray jsonArray = (JSONArray) json.parse(data.get("quest"));
-            List<String> quest = jsonArray;
+            List<String> quest = null;
+
+            if(data.get("quest") != null){
+                JSONArray jsonArray = (JSONArray) json.parse(data.get("quest"));
+                quest = jsonArray;
+            }
 
             errandDTO.setUUID(UUID);
             errandDTO.setE_date(E_date);
