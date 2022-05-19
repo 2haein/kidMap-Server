@@ -50,7 +50,7 @@ public class ChildController {
     // 아이 현재 위치 저장하기
     @RequestMapping(path = "/savePositionChild", method = {RequestMethod.GET, RequestMethod.POST})
     public @ResponseBody
-    void savePositionChild(@RequestBody HashMap<String, String> data, ChildDTO childDTO) {
+    void savePositionChild(@RequestBody HashMap<String, String> data) {
         System.out.println("안드로이드 -> 서버 /savePositionChild " + data + ":" + data.get("UUID"));
 
         String uuid = String.valueOf(data.get("UUID"));
@@ -60,6 +60,24 @@ public class ChildController {
 //            childDTO.setUUID(uuid);
 
         childService.savePositionChild(uuid, current_latitude, current_longitude);
+
+    }
+
+    // 아이 QR 정보 저장하기
+    @RequestMapping(path = "/saveQRCodeChild", method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody
+    void saveQRCodeChild(@RequestBody HashMap<String, String> data) {
+        System.out.println("안드로이드 -> 서버 /saveQRCodeChild " + data + ":" + data.get("UUID"));
+
+        String uuid = String.valueOf(data.get("UUID"));
+        Double home_latitude = Double.valueOf((data.get("home_latitude")));   // 아이 집 위치 위도
+        Double home_longitude = Double.valueOf((data.get("home_longitude")));     // 아이 집 위치 경도
+        String home_address = String.valueOf(data.get("home_address"));
+        boolean agreement = Boolean.parseBoolean(data.get("agreement"));
+
+//            childDTO.setUUID(uuid);
+
+        childService.saveQRCodeChild(uuid, home_latitude, home_longitude, home_address, agreement);
 
     }
 }

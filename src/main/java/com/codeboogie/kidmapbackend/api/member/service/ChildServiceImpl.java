@@ -93,4 +93,27 @@ public class ChildServiceImpl implements ChildService{
         mongoTemplate.updateFirst(query, update, "child");
     }
 
+
+    // 아이 QR코드 정보 저장하기
+    @Override
+    public void saveQRCodeChild(String uuid, Double home_latitude, Double home_longitude, String home_address, boolean agreement){
+
+        System.out.println("안드로이드 -> 서버 ServiceImpl saveQRCodeChild 업데이트:"+ uuid);
+        Query query = new Query(Criteria.where("UUID").is(uuid));
+
+
+        //SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        //Date sDate = inputFormat.parse(feeling.getPublishDate().toString());
+
+        Update update = new Update();
+        update.set("home_latitude", home_latitude);
+        update.set("home_longitude", home_longitude);
+        update.set("home_address", home_address);
+        update.set("agreement", agreement);
+
+
+
+        mongoTemplate.updateFirst(query, update, "child");
+    }
+
 }
