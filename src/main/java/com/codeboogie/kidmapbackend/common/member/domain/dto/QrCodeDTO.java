@@ -1,5 +1,8 @@
 package com.codeboogie.kidmapbackend.common.member.domain.dto;
 
+import lombok.Data;
+
+@Data
 public class QrCodeDTO {
     private double home_latitude;   // 아이 집 위치 위도
 

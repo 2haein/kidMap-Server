@@ -1,6 +1,7 @@
 package com.codeboogie.kidmapbackend.api.member.service;
 
 import com.codeboogie.kidmapbackend.common.member.domain.dto.ChildDTO;
+import com.codeboogie.kidmapbackend.common.member.domain.dto.QrCodeDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.model.Child;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -16,4 +17,5 @@ public interface ChildService {
 
     void saveQRCodeChild(String uuid, Double home_latitude, Double home_longitude, String home_address, boolean agreement); // 아이 QrCode 정보 저장하기
 
+    QrCodeDTO fetchQRCodeChild(String uuid);    // 아이 qrcode 정보 가져오기
 }

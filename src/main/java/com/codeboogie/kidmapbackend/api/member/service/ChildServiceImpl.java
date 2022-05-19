@@ -2,6 +2,7 @@ package com.codeboogie.kidmapbackend.api.member.service;
 
 import com.codeboogie.kidmapbackend.common.member.domain.dto.ChildDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.MemberDTO;
+import com.codeboogie.kidmapbackend.common.member.domain.dto.QrCodeDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.model.Child;
 import com.codeboogie.kidmapbackend.common.member.domain.model.Member;
 import com.codeboogie.kidmapbackend.common.member.domain.repository.ChildRepository;
@@ -67,7 +68,7 @@ public class ChildServiceImpl implements ChildService{
     }
 
 
-    // 아이 현재 위치 저장하
+    // 아이 현재 위치 저장하기
     @Override
     public void savePositionChild(String uuid, Double current_latitude, Double current_longitude){
 //        if(uuid == null) {
@@ -116,4 +117,24 @@ public class ChildServiceImpl implements ChildService{
         mongoTemplate.updateFirst(query, update, "child");
     }
 
+    // 아이 QR정보 가져오기
+    @Override
+    public QrCodeDTO fetchQRCodeChild(String uuid){
+
+        Query query = new Query();
+        Criteria criteria = new Criteria();
+
+        criteria = Criteria.where("UUID").is(uuid);
+        query.addCriteria(criteria);
+
+
+        Child child = mongoTemplate.findOne(query, Child.class, "child");
+
+        QrCodeDTO qrCodeDTO = new QrCodeDTO();
+        qrCodeDTO.setAgreement(child.isAgreement());
+        qrCodeDTO.setHome_address(child.getHome_address());
+        qrCodeDTO.setHome_latitude(child.getHome_latitude());
+        qrCodeDTO.setHome_longitude(child.getHome_longitude());
+        return qrCodeDTO;
+    }
 }

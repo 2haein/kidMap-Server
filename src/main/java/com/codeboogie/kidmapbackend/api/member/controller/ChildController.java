@@ -4,6 +4,7 @@ import com.codeboogie.kidmapbackend.api.member.service.ChildService;
 import com.codeboogie.kidmapbackend.api.member.service.MemberService;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.ChildDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.MemberDTO;
+import com.codeboogie.kidmapbackend.common.member.domain.dto.QrCodeDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.model.Child;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -78,6 +79,19 @@ public class ChildController {
 //            childDTO.setUUID(uuid);
 
         childService.saveQRCodeChild(uuid, home_latitude, home_longitude, home_address, agreement);
+
+    }
+
+    // 아이 QRCode를 통해 정보 가져오기
+    @RequestMapping(path = "/fetchQRCodeChild", method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody
+    QrCodeDTO fetchQRCodeChild(@RequestBody HashMap<String, String> data) {
+        System.out.println("안드로이드 -> 서버 /fetchQRCodeChild " + data + ":" + data.get("UUID"));
+
+        String uuid = String.valueOf(data.get("UUID"));
+//            childDTO.setUUID(uuid);
+
+        return childService.fetchQRCodeChild(uuid);
 
     }
 }
