@@ -2,6 +2,7 @@ package com.codeboogie.kidmapbackend.api.member.service;
 
 import com.codeboogie.kidmapbackend.common.member.domain.dto.ErrandDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.MemberDTO;
+import com.codeboogie.kidmapbackend.common.member.domain.model.Errand;
 
 public interface ErrandService {
 
@@ -11,4 +12,5 @@ public interface ErrandService {
 
     boolean fetchErrandChecking(MemberDTO memberDTO);   // 심부름 완료 여부 가져오기
 
+    Errand fetchRecentErrand(String userId);    // 최근 부모 심부름 가져오기
 }

@@ -5,6 +5,8 @@ import com.codeboogie.kidmapbackend.api.member.service.MemberService;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.ChildDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.ErrandDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.MemberDTO;
+import com.codeboogie.kidmapbackend.common.member.domain.model.Child;
+import com.codeboogie.kidmapbackend.common.member.domain.model.Errand;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -30,6 +32,7 @@ public class ErrandController {
             String errandDate = data.get("E_date") + ":00.000Z";
             Date E_date = inputFormat.parse(errandDate);
 
+            String userId = String.valueOf(data.get("userId"));
             String E_content = String.valueOf(data.get("E_content"));
             String UUID = String.valueOf(data.get("UUID"));
             Double target_latitude = Double.valueOf((data.get("target_latitude")));
@@ -48,6 +51,7 @@ public class ErrandController {
             }
 
             errandDTO.setUUID(UUID);
+            errandDTO.setUserId(userId);
             errandDTO.setE_date(E_date);
             errandDTO.setE_content(E_content);
             errandDTO.setTarget_latitude(target_latitude);
@@ -102,6 +106,19 @@ public class ErrandController {
         }
 
         return errandService.fetchErrandChecking(memberDTO);
+    }
+
+    // 부모가 시킨 최근 심부름 DB정보 가져오기
+    @RequestMapping(path = "/fetchRecentErrand", method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody
+    Errand fetchRecentErrand(@RequestBody HashMap<String, String> data, ChildDTO childDTO) {
+        System.out.println("안드로이드 -> 서버 /fetchRecentErrand " + data + ":" + data.get("userId"));
+
+        String userId = String.valueOf(data.get("userId"));
+//            childDTO.setUUID(uuid);
+
+        return errandService.fetchRecentErrand(userId);
+
     }
 
 }

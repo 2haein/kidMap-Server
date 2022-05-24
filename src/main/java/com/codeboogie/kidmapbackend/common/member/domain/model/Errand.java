@@ -31,6 +31,8 @@ public class Errand {
 //    @Column(name= "member_id")  // mongodb에선 jpa적용 불가
     private String _id;
 
+    private String userId; //부모 아이디
+
     private String UUID; //자녀 아이디
 
     private Date E_date; //심부름 일자

@@ -2,12 +2,10 @@ package com.codeboogie.kidmapbackend.api.member.service;
 
 import com.codeboogie.kidmapbackend.common.member.domain.dto.ErrandDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.MemberDTO;
-import com.codeboogie.kidmapbackend.common.member.domain.model.Child;
 import com.codeboogie.kidmapbackend.common.member.domain.model.Errand;
 import com.codeboogie.kidmapbackend.common.member.domain.model.Member;
 import com.codeboogie.kidmapbackend.common.member.domain.repository.ErrandRepository;
 import com.codeboogie.kidmapbackend.common.member.domain.repository.MemberRepository;
-import com.codeboogie.kidmapbackend.util.RandomString;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -40,6 +38,7 @@ public class ErrandServiceImpl implements ErrandService{
 //            throw new NullPointerException("Data Null");
 //        }
         Errand errand = new Errand();
+        errand.setUserId(errandDTO.getUserId());
         errand.setUUID(errandDTO.getUUID());
         errand.setE_date(errandDTO.getE_date());
         errand.setE_content(errandDTO.getE_content());
@@ -105,6 +104,28 @@ public class ErrandServiceImpl implements ErrandService{
 
         return member.isErrandComplete();
 
+    }
+
+    // 최근 부모 심부름 DB정보 가져오기
+    public Errand fetchRecentErrand(String userId){
+
+        Query query = new Query();
+
+        Criteria criteria = new Criteria();
+
+//        Criteria criteria_arr[] = new Criteria[2];
+        criteria = Criteria.where("userId").is(userId);
+        query.addCriteria(criteria);
+//        criteria_arr[0] = Criteria.where("uuid").is(uuid);
+//        criteria_arr[1] = Criteria.where("uuid").is(uuid);
+//        errandRepository.  find().sort({_id:1});
+//        mongoOperation.find(query, Domain.class);
+
+//        query.addCriteria(criteria.andOperator(criteria_arr));
+//        System.out.println("123"+mongoTemplate.findOne(query, Child.class, "child"));
+        List<Errand> entityList = errandRepository.findAllByUserId(userId);
+
+        return entityList.get(entityList.size() - 1);
     }
 
 
