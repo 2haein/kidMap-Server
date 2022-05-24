@@ -28,6 +28,9 @@ public class ErrandServiceImpl implements ErrandService{
     private final ErrandRepository errandRepository;
 
     @Autowired
+    private final MemberRepository memberRepository;
+
+    @Autowired
     private MongoTemplate mongoTemplate; //몽고DB 템플릿 불러오기
 
     @Override
@@ -71,5 +74,39 @@ public class ErrandServiceImpl implements ErrandService{
         e.printStackTrace();
     }
     }
+
+    // 기존 디폴트 심부름 완료여부 true이고 심부름 등록시 심부름 완료여부는 false이다.
+    // 완료시 true값으로 완료 업데이트 하기
+    public void updateErrandChecking(MemberDTO memberDTO){
+        System.out.println("안드로이드 -> 서버 ServiceImpl updateChecking 업데이트:"+ memberDTO.isErrandComplete());
+        Criteria criteria = new Criteria();
+        Query query = new Query(Criteria.where("userId").is(memberDTO.getUserId()));
+
+//        List<Errand> errandList = new ArrayList<>();
+//        errandList.add(errand);
+
+        Update update = new Update();
+
+//        Criteria criteria_arr[] = new Criteria[2];
+        update.set("isErrandComplete", memberDTO.isErrandComplete());
+
+
+        mongoTemplate.updateFirst(query, update, "member");
+    }
+
+    public boolean fetchErrandChecking(MemberDTO memberDTO){
+//        Member member = new Member();
+//        member.setUserId(memberDTO.getUserId());
+        System.out.println("안드로이드 -> 서버 ServiceImpl fetchErrandChecking 실행");
+
+        Member member = memberRepository.findByUserId(memberDTO.getUserId());
+        System.out.println("심부름 완료여부 가져오기: " + member.isErrandComplete());
+
+
+        return member.isErrandComplete();
+
+    }
+
+
 
 }

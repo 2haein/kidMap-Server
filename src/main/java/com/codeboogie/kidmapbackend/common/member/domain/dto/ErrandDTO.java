@@ -30,7 +30,7 @@ public class ErrandDTO {
 
     private String start_name; // 출발지 장소 이름
 
-    private boolean checking;  //   위험요소 파악했는지 여부
+    private boolean checking;  //   심부름 완료 여부
 
     private List<String> quest; // 퀘스트 목록
 }

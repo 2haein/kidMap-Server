@@ -2,6 +2,7 @@ package com.codeboogie.kidmapbackend.api.member.controller;
 
 import com.codeboogie.kidmapbackend.api.member.service.ErrandService;
 import com.codeboogie.kidmapbackend.api.member.service.MemberService;
+import com.codeboogie.kidmapbackend.common.member.domain.dto.ChildDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.ErrandDTO;
 import com.codeboogie.kidmapbackend.common.member.domain.dto.MemberDTO;
 import org.json.simple.JSONArray;
@@ -63,6 +64,44 @@ public class ErrandController {
         } catch(final Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @RequestMapping(path="/updateErrandChecking", method={ RequestMethod.GET, RequestMethod.POST })
+    public @ResponseBody void updateChecking(@RequestBody HashMap<String, String> data, MemberDTO memberDTO) {
+        System.out.println("안드로이드 -> 서버 /updateErrandChecking"+ data+ ":"+ data.get("E_content") + " , " +data.get("userId"));
+
+        try {
+            boolean isErrandComplete = Boolean.parseBoolean(data.get("isErrandComplete"));
+            String userId = String.valueOf(data.get("userId"));
+
+            memberDTO.setErrandComplete(isErrandComplete);
+            memberDTO.setUserId(userId);
+
+            errandService.updateErrandChecking(memberDTO);
+
+        } catch(final Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // 심부름 완료 여부 확인하기
+    @RequestMapping(path = "/fetchErrandChecking", method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody boolean fetchErrandChecking(@RequestBody HashMap<String, String> data, MemberDTO memberDTO) {
+        System.out.println("안드로이드 -> 서버 /fetchErrandChecking " + data + ":" + data.get("userId"));
+
+        try {
+
+//            boolean isErrandComplete = Boolean.parseBoolean(data.get("isErrandComplete"));
+            String userId = String.valueOf(data.get("userId"));
+            memberDTO.setUserId(userId);
+
+
+
+        } catch (final Exception e) {
+            e.printStackTrace();
+        }
+
+        return errandService.fetchErrandChecking(memberDTO);
     }
 
 }

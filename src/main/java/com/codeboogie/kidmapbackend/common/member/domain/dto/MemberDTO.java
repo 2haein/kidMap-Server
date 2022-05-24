@@ -18,5 +18,7 @@ public class MemberDTO {
 
     private Integer childNum;
 
+    private boolean isErrandComplete;  //   심부름 완료 여부
+
     private List<Child> Child = new ArrayList<Child>();
 }

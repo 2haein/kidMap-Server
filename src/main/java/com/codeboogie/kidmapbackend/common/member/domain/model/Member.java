@@ -3,6 +3,7 @@ package com.codeboogie.kidmapbackend.common.member.domain.model;
 import lombok.*;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -35,6 +36,9 @@ public class Member {
     private String telNum;  // 부모 전화번호
 
     private Integer childNum;   // 자녀수
+
+    @Field
+    private boolean isErrandComplete = true;  //   심부름 완료 여부
 
     private List<Child> Child = new ArrayList<Child>();  // 자녀 UUID
 
