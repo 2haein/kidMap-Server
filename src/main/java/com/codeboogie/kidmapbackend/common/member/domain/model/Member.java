@@ -37,7 +37,7 @@ public class Member {
 
     private Integer childNum;   // 자녀수
 
-    @Field
+//    @Field
     private boolean isErrandComplete = true;  //   심부름 완료 여부
 
     private List<Child> Child = new ArrayList<Child>();  // 자녀 UUID
