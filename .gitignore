@@ -5,6 +5,7 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 **/src/main/**/application.de*
+.DS_Store
 
 ### STS ###
 .apt_generated
