@@ -1,0 +1,14 @@
+spring:
+  data:
+    mongodb:
+      auto-index-creation: true
+      database: kid_map
+      uri: mongodb+srv://kidmap:kidmap34##@cluster0.17aps.mongodb.net/kidmap
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        ogm:
+          datastore:
+            create_database: ture
